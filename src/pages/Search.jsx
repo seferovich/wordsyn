@@ -1,27 +1,34 @@
-
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import SearchIcon from '@mui/icons-material/Search';
-
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import CssBaseline from '@mui/material/CssBaseline'
+import TextField from '@mui/material/TextField'
+import Box from '@mui/material/Box'
+import SearchIcon from '@mui/icons-material/Search'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import { search } from '../functions/functions'
+import { List, ListItem, ListItemText } from '@mui/material'
 
 
 
 export default function Search() {
 
-  return (
+  const [val, setVal] = useState('')
+  const [res, setRes] = useState([])
   
+  const handleChange = (e) => {
+    setVal(e.target.value)
+  }
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    setRes(search(val))
+  }
+
+
+
+  return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -38,10 +45,12 @@ export default function Search() {
           <Typography component="h1" variant="h5">
             Search
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
+              onChange={handleChange}
+              value={val}
               fullWidth
               label="Search a word or a synonym"
               name="search"
@@ -56,6 +65,16 @@ export default function Search() {
               Search
             </Button>
           </Box>
+          <Typography component="h1" variant="h5">
+            Synonyms:
+          </Typography>
+          <List>
+            {res ? res.map((val, i) => (
+              <ListItem key={i}>
+                <ListItemText key={i}>{val}</ListItemText>
+              </ListItem>
+            )): ''}
+          </List>
         </Box>
         
       </Container>

@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/wordsyn/static/css/main.b3eeeea7.css",
-    "main.js": "/wordsyn/static/js/main.96b6e66a.js",
+    "main.js": "/wordsyn/static/js/main.502b8b83.js",
     "index.html": "/wordsyn/index.html",
     "main.b3eeeea7.css.map": "/wordsyn/static/css/main.b3eeeea7.css.map",
-    "main.96b6e66a.js.map": "/wordsyn/static/js/main.96b6e66a.js.map"
+    "main.502b8b83.js.map": "/wordsyn/static/js/main.502b8b83.js.map"
   },
   "entrypoints": [
     "static/css/main.b3eeeea7.css",
-    "static/js/main.96b6e66a.js"
+    "static/js/main.502b8b83.js"
   ]
 }

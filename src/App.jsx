@@ -27,7 +27,7 @@ export default function App() {
         
         <Nav />
         <Routes>
-          <Route path='/wordsyn/create' element={<Create />} />
+          <Route path='/wordsyn/' element={<Create />} />
           <Route path='/wordsyn/search' element={<Search />} />
         </Routes>
       </ThemeProvider>

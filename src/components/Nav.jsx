@@ -16,7 +16,7 @@ export default function Nav() {
           value={value}
         >
           <Link to='/wordsyn/search'><BottomNavigationAction label="Search" icon={<SearchIcon color='secondary.main'/>} ></BottomNavigationAction></Link>
-          <Link to='/wordsyn/create'><BottomNavigationAction label="Create" icon={<AddIcon color='secondary.main' />} /></Link>
+          <Link to='/wordsyn/'><BottomNavigationAction label="Create" icon={<AddIcon color='secondary.main' />} /></Link>
         </BottomNavigation>
       </Paper>
     

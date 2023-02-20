@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/wordsyn/static/css/main.b3eeeea7.css",
+    "main.js": "/wordsyn/static/js/main.96b6e66a.js",
+    "index.html": "/wordsyn/index.html",
+    "main.b3eeeea7.css.map": "/wordsyn/static/css/main.b3eeeea7.css.map",
+    "main.96b6e66a.js.map": "/wordsyn/static/js/main.96b6e66a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b3eeeea7.css",
+    "static/js/main.96b6e66a.js"
+  ]
+}

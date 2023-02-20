@@ -27,8 +27,8 @@ export default function App() {
         
         <Nav />
         <Routes>
-          <Route path='/create' element={<Create />} />
-          <Route path='/search' element={<Search />} />
+          <Route path='/wordsyn/create' element={<Create />} />
+          <Route path='/wordsyn/search' element={<Search />} />
         </Routes>
       </ThemeProvider>
       <ToastContainer />

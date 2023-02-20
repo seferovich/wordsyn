@@ -18,8 +18,8 @@ export default function Nav() {
           showLabels
           value={value}
         >
-          <Link to='/search'><BottomNavigationAction label="Search" icon={<SearchIcon color='secondary.main'/>} ></BottomNavigationAction></Link>
-          <Link to='/create'><BottomNavigationAction label="Create" icon={<AddIcon color='secondary.main' />} /></Link>
+          <Link to='/wordsyn/search'><BottomNavigationAction label="Search" icon={<SearchIcon color='secondary.main'/>} ></BottomNavigationAction></Link>
+          <Link to='/wordsyn/create'><BottomNavigationAction label="Create" icon={<AddIcon color='secondary.main' />} /></Link>
         </BottomNavigation>
       </Paper>
     

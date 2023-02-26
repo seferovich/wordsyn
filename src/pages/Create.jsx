@@ -20,12 +20,12 @@ export default function Create() {
   
   const onWordChange = (e) => { 
     setWord(e.target.value) 
-    console.log(word)
+    // console.log(word)
   }
 
   const onSynChange = (e) => { 
     setSyn(e.target.value) 
-    console.log(syn)
+    // (syn)
   }
 
   const handleAdd = (e) => {
@@ -35,17 +35,19 @@ export default function Create() {
     setSyn('')
     
   }
-  console.log(allWords)
+  
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setAllWords([...allWords, word])
 
     create([...allWords, word])
+    
     setAllWords([])
+    setWord('')
     toast.success('Created')
   }
-
+  // (allWords)
 
   return (
     

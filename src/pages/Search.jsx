@@ -25,7 +25,7 @@ export default function Search() {
     e.preventDefault()
     setRes(search(val))
   }
-  console.log(res)
+  // console.log(res)
 
 
 

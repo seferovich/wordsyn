@@ -79,5 +79,5 @@ export default function Search() {
         </Box>
         
       </Container>
-  );
+  )
 }

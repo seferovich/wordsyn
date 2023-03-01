@@ -36,10 +36,6 @@ export class HashTable {
       } 
     }
 
-    
-    update(key, value){
-      
-    }
 
     get(key){
       let index = this._hash(key)
@@ -51,6 +47,19 @@ export class HashTable {
         }
       }
       return undefined
+    }
+
+    getAll(){
+      let all = []
+
+      for(let i = 0; i < this.keyMap.length; i++){
+        if(this.keyMap[i]){
+          for(let j = 0; j < this.keyMap[i].length; j++){
+            all.push(this.keyMap[i][j])
+          }
+        }
+      }
+      return all
     }
     
 }
@@ -91,9 +100,12 @@ export function create(arr) {
 }
 
 export function search (key){
-  console.log(ht.keyMap)
   return ht.get(key)
     
+}
+
+export function getAll(){
+  return ht.getAll()
 }
 
 

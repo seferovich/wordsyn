@@ -8,8 +8,15 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import AddIcon from '@mui/icons-material/Add'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit';
 import { create } from '../functions/functions'
 import {toast} from 'react-toastify'
+import { Chip } from '@mui/material'
+import { Stack } from '@mui/system'
+import Popover from '@mui/material/Popover';
+import IconButton from '@mui/material/IconButton';
+import InputBase from '@mui/material/InputBase';
 
 
 
@@ -17,15 +24,45 @@ export default function Create() {
   const [word, setWord] = useState('')
   const [syn, setSyn] = useState('')
   const [allWords, setAllWords] = useState([])
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [currId, setCurrId] = useState()
+  const open = Boolean(anchorEl)
   
   const onWordChange = (e) => { 
     setWord(e.target.value) 
     // console.log(word)
   }
 
+  const onEditChange = (e) => {
+    // I had to do this because it isn't a good idea to mutate the state directly
+    let newVal =  e.currentTarget.value
+    let allWordsCopy = [...allWords]
+    allWordsCopy[currId] = newVal
+
+    setAllWords(allWordsCopy)
+  }
+  const handleDelete = (e) => {
+    e.preventDefault()
+    // I had to do this because it isn't a good idea to mutate the state directly
+    let allWordsCopy = [...allWords]
+    allWordsCopy.splice(currId, 1)
+    setAllWords(allWordsCopy)
+    handleClose()
+    console.log(allWords, e.currentTarget.id)
+  }
+
+  const handleOpen = (e) => {
+    setAnchorEl(e.currentTarget)
+    setCurrId(e.currentTarget.id)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+
   const onSynChange = (e) => { 
     setSyn(e.target.value) 
-    // (syn)
   }
 
   const handleAdd = (e) => {
@@ -35,7 +72,6 @@ export default function Create() {
     setSyn('')
     
   }
-  
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -47,8 +83,8 @@ export default function Create() {
     setWord('')
     toast.success('Created')
   }
-  // (allWords)
-
+  console.log(allWords)
+  
   return (
     
       <Container component="main" maxWidth="md">
@@ -101,17 +137,67 @@ export default function Create() {
                 </Button>
               </Grid>
               
+              
             </Grid>
+
+            <Stack direction='row' maxWidth='xs' mt={1} spacing={1}>
+            {allWords.length > 0 ? allWords.map((val, i) => (
+                <Chip
+                  label={val}
+                  variant='outlined'
+                  sx={{zIndex: 2}}
+                  deleteIcon={<EditIcon id={i}/>}
+                  key={i}
+                  id={i}
+                  onDelete={handleOpen}
+                  
+                 />
+            )) : ''}
+            </Stack>
+            
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 2, mb: 2 }}
             >
               Create
             </Button>
           </Box>
         </Box>
+
+        
+        <Popover
+          // id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left"
+          }}
+        >
+
+          
+          <Stack direction='row'>
+            <TextField
+              sx={{ m: 1, flex: 1 }}
+              value={allWords[currId]}
+              onChange={onEditChange}
+              label='Edit or delete the synoynm'
+            />
+            <IconButton onClick={handleDelete} type="button">
+            
+              <DeleteIcon color='primary'/>
+            </IconButton>
+          </Stack>
+            
+            
+        </Popover>  
         
       </Container>
     

@@ -23,9 +23,12 @@ export default function Search() {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    setRes(search(val))
+    let tempRes = search(val)
+    
+    tempRes = tempRes.filter(item => item !== val)
+    setRes(tempRes)
   }
-  // console.log(res)
+  
 
 
 
@@ -66,6 +69,7 @@ export default function Search() {
               Search
             </Button>
           </Box>
+          
           <Typography component="h1" variant="h5">
             Synonyms:
           </Typography>

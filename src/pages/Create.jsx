@@ -26,6 +26,7 @@ export default function Create() {
   const [allWords, setAllWords] = useState([])
   const [anchorEl, setAnchorEl] = useState(null)
   const [currId, setCurrId] = useState()
+  const [isError, setIsError] = useState(false)
   const open = Boolean(anchorEl)
   
   const onWordChange = (e) => { 
@@ -33,14 +34,6 @@ export default function Create() {
     // console.log(word)
   }
 
-  const onEditChange = (e) => {
-    // I had to do this because it isn't a good idea to mutate the state directly
-    let newVal =  e.currentTarget.value
-    let allWordsCopy = [...allWords]
-    allWordsCopy[currId] = newVal
-
-    setAllWords(allWordsCopy)
-  }
   const handleDelete = (e) => {
     e.preventDefault()
     // I had to do this because it isn't a good idea to mutate the state directly
@@ -50,6 +43,17 @@ export default function Create() {
     handleClose()
     console.log(allWords, e.currentTarget.id)
   }
+
+  const onEditChange = (e) => {
+    // I had to do this because it isn't a good idea to mutate the state directly
+    let newVal =  e.currentTarget.value
+    let allWordsCopy = [...allWords]
+    allWordsCopy[currId] = newVal
+    
+    setAllWords(allWordsCopy)
+  }
+
+  
 
   const handleOpen = (e) => {
     setAnchorEl(e.currentTarget)
@@ -67,8 +71,17 @@ export default function Create() {
 
   const handleAdd = (e) => {
     e.preventDefault()
-    
-    setAllWords([...allWords, syn])
+    if(syn !== '' && word !== '' && !(allWords.includes(syn))){
+      setAllWords([...allWords, syn])
+      setIsError(false)
+    }else if(allWords.includes(syn)){
+      setIsError(true)
+      toast.error("You've already added this word")
+    }else if(syn == '' || word == ''){
+      setIsError(true)
+      toast.error(`You need to add a ${word === '' ? 'word' : 'synonym'}`)
+    }
+      
     setSyn('')
     
   }
@@ -114,6 +127,7 @@ export default function Create() {
                   fullWidth
                   label="Word"
                   autoFocus
+                  error={isError}
                 />
               </Grid>
               <Grid item xs={9} sm={5}>
@@ -124,6 +138,7 @@ export default function Create() {
                   fullWidth
                   label="Synonym"
                   name="syn"
+                  error={isError}
                 />
               </Grid>
               <Grid item xs={3} sm={2}>
@@ -136,24 +151,30 @@ export default function Create() {
                   Add
                 </Button>
               </Grid>
+
+              <Grid item sm={12}>
+              {/* <Stack direction='row'  spacing={1}> */}
+              {allWords.length > 0 ? allWords.map((val, i) => (
+                  <Chip
+                    label={val}
+                    variant='outlined'
+                    sx={{zIndex: 2}}
+                    deleteIcon={<EditIcon id={i}/>}
+                    key={i}
+                    id={i}
+                    onDelete={handleOpen}
+                  />
+                )) : ''}
+              {/* </Stack> */}
+                
+              </Grid>
+
+              
               
               
             </Grid>
 
-            <Stack direction='row' maxWidth='xs' mt={1} spacing={1}>
-            {allWords.length > 0 ? allWords.map((val, i) => (
-                <Chip
-                  label={val}
-                  variant='outlined'
-                  sx={{zIndex: 2}}
-                  deleteIcon={<EditIcon id={i}/>}
-                  key={i}
-                  id={i}
-                  onDelete={handleOpen}
-                  
-                 />
-            )) : ''}
-            </Stack>
+            
             
             <Button
               type="submit"
@@ -185,7 +206,7 @@ export default function Create() {
           
           <Stack direction='row'>
             <TextField
-              sx={{ m: 1, flex: 1 }}
+              sx={{ m: 1.2, flex: 1 }}
               value={allWords[currId]}
               onChange={onEditChange}
               label='Edit or delete the synoynm'

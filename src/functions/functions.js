@@ -1,55 +1,68 @@
+import { Wash } from "@mui/icons-material"
+
 export class HashTable {
 
-      constructor(size=53){
-        this.keyMap = new Array(size)
-      }
+  constructor(size=53){
+    this.keyMap = new Array(size)
+  }
     
-      _hash(key) {
-        let total = 0
-        let PRIME_NUM = 31
-        for (let i = 0; i < Math.min(key.length, 100); i++) {
-          let char = key[i]
-          let value = char.charCodeAt(0) - 96
-          total = (total * PRIME_NUM + value) % this.keyMap.length
-        }
-        return total
-      }
+  _hash(key) {
+    let total = 0
+    let PRIME_NUM = 31
+    for (let i = 0; i < Math.min(key.length, 100); i++) {
+      let char = key[i]
+      let value = char.charCodeAt(0) - 96
+      total = (total * PRIME_NUM + value) % this.keyMap.length
+    }
+    return total
+  }
       
-      set(key, value){
-        let index = this._hash(key)
-        if(!this.keyMap[index]){
-          this.keyMap[index] = []
-        }
+  set(key, value){
+    let index = this._hash(key)
+    if(!this.keyMap[index]){
+      this.keyMap[index] = []
+    }
       
-        this.keyMap[index].push([key, value])
+    this.keyMap[index].push([key, value])
         
-      }
+  }
   
   
-      get(key){
-        let index = this._hash(key)
-        if(this.keyMap[index]){
-          for(let i = 0; i < this.keyMap[index].length; i++){
-            if(this.keyMap[index][i][0] === key){
-              return this.keyMap[index][i][1]
-            }
-          }
+  get(key){
+    let index = this._hash(key)
+    if(this.keyMap[index]){
+      for(let i = 0; i < this.keyMap[index].length; i++){
+        if(this.keyMap[index][i][0] === key){
+          return this.keyMap[index][i][1]
         }
-        return undefined
       }
+    }
+    return undefined
+  }
+
+  remove(key){
+    let index = this._hash(key)
+    if(this.keyMap[index]){
+      for(let i = 0; i < this.keyMap[index].length; i++){
+        if(this.keyMap[index][i][0] === key){
+          this.keyMap[index].splice(i, 1)
+        }
+      }
+    }
+  } 
       
-      getAll(){
-        let all = []
+  getAll(){
+    let all = []
   
-        for(let i = 0; i < this.keyMap.length; i++){
-          if(this.keyMap[i]){
-            for(let j = 0; j < this.keyMap[i].length; j++){
-              all.push(this.keyMap[i][j])
-            }
-          }
+    for(let i = 0; i < this.keyMap.length; i++){
+      if(this.keyMap[i]){
+        for(let j = 0; j < this.keyMap[i].length; j++){
+          all.push(this.keyMap[i][j])
         }
-        return all
       }
+    }
+    return all
+  }
       
 }
 
@@ -83,8 +96,7 @@ export const create = (arr) => {
     // If it doesn't exist, make a new entry in hash table
     if(index === undefined){
       // If the index we found in the for loop above isn't undefined, we set it as the index of the array of synonyms from the wordList,
-      // but if it doesn't exist (undefined), or it was just created, it means that it's the last array in the wordList array.
-      
+      // but if it doesn't exist (undefined), or it was just created, it means that it's the last array in the wordList array. 
       ht.set(word, wordListIndex === undefined ? wordList.length - 1 : wordListIndex)
     }
     
@@ -96,5 +108,21 @@ export const create = (arr) => {
 export const search = (word) => {
   const index = ht.get(word)
   return wordList[index]
+  
 }
 
+
+export const remove = (word) => {
+  // Get the index in the word list
+  const index = ht.get(word)
+  
+  // Search for the word in the word list and remove it
+  for(let i = 0; i < wordList[index].length; i++){
+    if(wordList[index][i] === word){
+      wordList[index].splice(i, 1)
+    }
+  }
+  // Remove the word from hash table
+  ht.remove(word)
+  
+}

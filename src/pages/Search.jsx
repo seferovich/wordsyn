@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 import SearchIcon from '@mui/icons-material/Search'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { search } from '../functions/functions'
+import { search, remove } from '../functions/functions'
 import { List, ListItem, ListItemText } from '@mui/material'
 
 
@@ -23,10 +23,11 @@ export default function Search() {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    let tempRes = search(val)
+    // let tempRes = search(val)
     
-    tempRes = tempRes.filter(item => item !== val)
-    setRes(tempRes)
+    // tempRes = tempRes.filter(item => item !== val)
+    // setRes(tempRes)
+    remove(val)
   }
   
 

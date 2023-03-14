@@ -100,7 +100,7 @@ export default function Create() {
   
   return (
     
-      <Container component="main" maxWidth="md">
+      <Container component="main" maxWidth="sm">
         <CssBaseline />
         <Box
           sx={{
@@ -116,9 +116,9 @@ export default function Create() {
           <Typography component="h1" variant="h5">
             Create
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+          <Box component="form"  onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={5}>
+              <Grid item xs={12} md={5}>
                 <TextField
                   onChange={onWordChange}
                   name="word"
@@ -130,7 +130,7 @@ export default function Create() {
                   error={isError}
                 />
               </Grid>
-              <Grid item xs={9} sm={5}>
+              <Grid item xs={9} md={5}>
                 <TextField
                   onChange={onSynChange}
                   value={syn}
@@ -141,7 +141,7 @@ export default function Create() {
                   error={isError}
                 />
               </Grid>
-              <Grid item xs={3} sm={2}>
+              <Grid item xs={3} md={2}>
                 <Button
                   onClick={handleAdd}
                   fullWidth
@@ -151,29 +151,31 @@ export default function Create() {
                   Add
                 </Button>
               </Grid>
-
-              <Grid item sm={12}>
-              {/* <Stack direction='row'  spacing={1}> */}
-              {allWords.length > 0 ? allWords.map((val, i) => (
-                  <Chip
-                    label={val}
-                    variant='outlined'
-                    sx={{zIndex: 2}}
-                    deleteIcon={<EditIcon id={i}/>}
-                    key={i}
-                    id={i}
-                    onDelete={handleOpen}
-                  />
-                )) : ''}
-              {/* </Stack> */}
-                
+              
+            <Grid item xs={3} md={12}>
+           
               </Grid>
-
+              
+              
               
               
               
             </Grid>
 
+            <Box maxWidth='sm'>
+              {allWords.length > 0 ? allWords.map((val, i) => (
+                <Chip
+                  label={val}
+                  variant='outlined'
+                  sx={{zIndex: 2, margin: '2px'}}
+                  deleteIcon={<EditIcon id={i}/>}
+                  key={i}
+                  id={i}
+                  onDelete={handleOpen}
+                />
+              )) : ''}
+          
+            </Box>
             
             
             <Button

@@ -3,7 +3,7 @@ import BottomNavigation from '@mui/material/BottomNavigation'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import SearchIcon from '@mui/icons-material/Search'
 import AddIcon from '@mui/icons-material/Add'
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { Paper } from '@mui/material'
 import { Link } from 'react-router-dom'
 

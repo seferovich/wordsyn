@@ -23,11 +23,11 @@ export default function Search() {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    // let tempRes = search(val)
+    let tempRes = search(val)
     
-    // tempRes = tempRes.filter(item => item !== val)
-    // setRes(tempRes)
-    remove(val)
+    tempRes = tempRes.filter(item => item !== val)
+    setRes(tempRes)
+    
   }
   
 
@@ -57,7 +57,7 @@ export default function Search() {
               onChange={handleChange}
               value={val}
               fullWidth
-              label="Search a word or a synonym"
+              label="Search a word"
               name="search"
               autoFocus
             />

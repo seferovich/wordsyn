@@ -17,6 +17,7 @@ import {toast} from 'react-toastify'
 import { Chip } from '@mui/material'
 import { Stack } from '@mui/system'
 import Popover from '@mui/material/Popover';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import IconButton from '@mui/material/IconButton';
 function All() {
   const [res, setRes] = useState()
@@ -41,7 +42,7 @@ function All() {
       }}
     >
       <Avatar sx={{ m: 1, bgcolor: 'primary.main', }}>
-        <AddIcon />
+        <MoreHorizIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
         Create

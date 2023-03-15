@@ -2,4 +2,6 @@
 
 Simple UI made with React and MUI
 
-Data structure: Hash Table
+Data structure used: Hash Table
+
+Github pages [link](https://sefkelol.github.io/wordsyn/)

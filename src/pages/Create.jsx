@@ -16,7 +16,7 @@ import { Chip } from '@mui/material'
 import { Stack } from '@mui/system'
 import Popover from '@mui/material/Popover';
 import IconButton from '@mui/material/IconButton';
-import InputBase from '@mui/material/InputBase';
+import validator from 'validator'
 
 
 
@@ -71,13 +71,13 @@ export default function Create() {
 
   const handleAdd = (e) => {
     e.preventDefault()
-    if(syn !== '' && word !== '' && !(allWords.includes(syn))){
+    if(!validator.isEmpty(syn, { ignore_whitespace: true }) && !validator.isEmpty(word, { ignore_whitespace: true }) && !(allWords.includes(syn))){
       setAllWords([...allWords, syn])
       setIsError(false)
     }else if(allWords.includes(syn)){
       setIsError(true)
       toast.error("You've already added this word")
-    }else if(syn == '' || word == ''){
+    }else if(validator.isEmpty(syn, { ignore_whitespace: true }) || validator.isEmpty(word, { ignore_whitespace: true })){
       setIsError(true)
       toast.error(`You need to add a ${word === '' ? 'word' : 'synonym'}`)
     }
@@ -96,7 +96,7 @@ export default function Create() {
     setWord('')
     toast.success('Created')
   }
-  console.log(allWords)
+  
   
   return (
     
@@ -104,7 +104,7 @@ export default function Create() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -113,7 +113,7 @@ export default function Create() {
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <AddIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h4">
             Create
           </Typography>
           <Box component="form"  onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
@@ -151,15 +151,6 @@ export default function Create() {
                   Add
                 </Button>
               </Grid>
-              
-            <Grid item xs={3} md={12}>
-           
-              </Grid>
-              
-              
-              
-              
-              
             </Grid>
 
             <Box maxWidth='sm'>
@@ -176,7 +167,6 @@ export default function Create() {
               )) : ''}
           
             </Box>
-            
             
             <Button
               type="submit"
@@ -204,8 +194,6 @@ export default function Create() {
             horizontal: "left"
           }}
         >
-
-          
           <Stack direction='row'>
             <TextField
               sx={{ m: 1.2, flex: 1 }}
@@ -217,11 +205,8 @@ export default function Create() {
             
               <DeleteIcon color='primary'/>
             </IconButton>
-          </Stack>
-            
-            
+          </Stack> 
         </Popover>  
-        
       </Container>
     
   )

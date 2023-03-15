@@ -12,7 +12,7 @@ export default function Nav() {
   const [value, setValue] = React.useState(1)
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, marginTop: 1, zIndex: 3 }} elevation={3}>
         <BottomNavigation
           value={value}
         >

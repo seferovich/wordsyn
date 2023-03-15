@@ -34,7 +34,7 @@ export default function App() {
           <Route path='/wordsyn/all' element={<All />} />
         </Routes>
       </ThemeProvider>
-      <ToastContainer />
+      <ToastContainer autoClose={1500} />
     </div>
 
   )

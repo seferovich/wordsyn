@@ -40,6 +40,8 @@ export class HashTable {
     return undefined
   }
 
+  
+
   remove(key){
     let index = this._hash(key)
     if(this.keyMap[index]){
@@ -66,10 +68,12 @@ export class HashTable {
       
 }
 
-
+// So basically, we have a word list outisde the hash table.
+// The hash table key is a word and the value is the index of the array of syonyms in the word list array.
+// It's easier to edit, remove and update the words like that.
 let ht = new HashTable()
 let wordList = []
-// clean wash
+
 export const create = (arr) => {
   // First, we check if the array of synonyms exists.
   let found = false
@@ -107,7 +111,26 @@ export const create = (arr) => {
 
 export const search = (word) => {
   const index = ht.get(word)
-  return wordList[index]
+  if(wordList[index]){
+    return wordList[index]
+  }else{
+    return undefined
+  }   
+}
+
+export const changeWord = (word, newWord) => {
+  const index = ht.get(word)
+  
+  // Search for the word and change it
+  for(let i = 0; i < wordList[index].length; i++){
+    if(wordList[index][i] === word){
+      wordList[index][i] = newWord
+    }
+  }
+  // Remove the old word from ht and add the new one
+  ht.remove(word)
+  ht.set(newWord, index)
+
   
 }
 
@@ -123,6 +146,9 @@ export const remove = (word) => {
     }
   }
   // Remove the word from hash table
-  ht.remove(word)
-  
+  ht.remove(word)  
+}
+
+export const getAll = () => {
+  return wordList
 }

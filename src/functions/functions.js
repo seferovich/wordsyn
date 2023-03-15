@@ -1,5 +1,3 @@
-import { Wash } from "@mui/icons-material"
-
 export class HashTable {
 
   constructor(size=53){
